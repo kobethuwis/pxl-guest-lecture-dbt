@@ -2,6 +2,11 @@
 -- Verifies that total_spent matches ticket_price * group_size (within $1 tolerance)
 -- and that visitor_type matches ticket_type
 
+{{ config(
+    warn_if = "> 0",
+    error_if = "> 10"
+) }}
+
 select
     v.vrm_visitor_id,
     v.vrm_ticket_id,

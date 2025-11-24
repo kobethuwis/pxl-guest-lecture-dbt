@@ -123,6 +123,13 @@ This creates:
 - Main DuckDB database with attached sources
 - Results directory for CSV exports
 
+Then run the following command:
+```bash
+dbt seed
+```
+
+This reads the `weather_data.csv` seed and makes it structurally referrable in dbt.
+
 **Step 3: Verify setup**
 ```bash
 dbt debug

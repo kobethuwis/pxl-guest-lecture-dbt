@@ -105,8 +105,8 @@ By doing this cleaning once in staging, every model that uses staging data gets 
 
 **Checkpoint:**
 ```bash
-dbt run --select 1_staging
-dbt test --select 1_staging
+dbt run --select zoo.1_staging
+dbt test --select zoo.1_staging
 ```
 
 ## Exercise 2: Intermediate Models
@@ -136,8 +136,8 @@ This modularity means you can build complex data pipelines from simple, reusable
 
 **Checkpoint:**
 ```bash
-dbt run --select 2_intermediate
-dbt test --select 2_intermediate
+dbt run --select zoo.2_intermediate
+dbt test --select zoo.2_intermediate
 ```
 
 ## Exercise 3: Mart Models
@@ -179,8 +179,8 @@ Because we put effort into staging and intermediate models, marts are now simple
 
 **Checkpoint:**
 ```bash
-dbt run --select 3_marts
-dbt test --select 3_marts
+dbt run --select zoo.3_marts
+dbt test --select zoo.3_marts
 ls results/  # Check CSV exports
 ```
 
