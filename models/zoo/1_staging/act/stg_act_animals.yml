@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: stg_act_animals
+    description: "Staged animal data from ACT system"
+    columns:
+      - name: act_animal_id
+        description: "Unique identifier for each animal"
+        data_tests:
+          - unique
+          - not_null
+
+      - name: act_health_status
+        description: "Health status of the animal"
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Healthy', 'Under Observation', 'Treatment', 'Recovering']
+              config:
+                severity: warn

@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: stg_act_enclosures
+    description: "Staged enclosure data from ACT system"
+    columns:
+      - name: act_enclosure_id
+        description: "Unique identifier for each enclosure"
+        data_tests:
+          - unique
+          - not_null
+
+      - name: act_enclosure_name
+        description: "Name of the enclosure"
+
+      - name: act_habitat_type
+        description: "Type of habitat"
+
+      - name: act_capacity
+        description: "Capacity of the enclosure"
+
+      - name: act_temperature_celsius
+        description: "Temperature in Celsius"
+
+      - name: act_humidity_percent
+        description: "Humidity percentage"
+
+      - name: source_system
+        description: "Source system identifier"

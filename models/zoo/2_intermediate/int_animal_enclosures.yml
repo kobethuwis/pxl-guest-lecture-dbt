@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: int_animal_enclosures
+    description: "Combined animal, enclosure, and species data"
+    columns:
+      - name: act_animal_id
+        description: "Unique identifier for each animal"
+        data_tests:
+          - unique
+          - not_null

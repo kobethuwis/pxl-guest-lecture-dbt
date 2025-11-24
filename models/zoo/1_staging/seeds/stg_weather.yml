@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: stg_weather
+    description: "Staged weather data from CSV seed"
+    columns:
+      - name: weather_date
+        description: "Date of weather observation"
+        data_tests:
+          - unique
+          - not_null
+
+      - name: temperature_celsius
+        description: "Temperature in Celsius"
+
+      - name: humidity_percent
+        description: "Humidity percentage"
+
+      - name: precipitation_mm
+        description: "Precipitation in millimeters"
+
+      - name: weather_condition
+        description: "Weather condition description"
+
+      - name: source_system
+        description: "Source system identifier"

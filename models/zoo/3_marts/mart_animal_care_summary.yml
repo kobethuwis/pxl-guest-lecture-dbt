@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: mart_animal_care_summary
+    description: "Animal care summary by species"

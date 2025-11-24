@@ -1,0 +1,8 @@
+version: 2
+
+models:
+  - name: int_daily_operations
+    description: "Combined visitor and weather data"
+    columns:
+      - name: operation_date
+        description: "Date of operation"

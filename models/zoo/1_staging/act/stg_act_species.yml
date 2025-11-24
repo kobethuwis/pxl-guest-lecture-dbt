@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: stg_act_species
+    description: "Staged species data from ACT system"
+    columns:
+      - name: act_species_id
+        description: "Unique identifier for each species"
+        data_tests:
+          - unique
+          - not_null
+
+      - name: act_common_name
+        description: "Common name of the species"
+
+      - name: act_scientific_name
+        description: "Scientific name of the species"
+
+      - name: act_habitat_type
+        description: "Type of habitat the species lives in"
+
+      - name: act_diet_type
+        description: "Type of diet (Carnivore, Herbivore, Omnivore)"
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Carnivore', 'Herbivore', 'Omnivore']
+
+      - name: act_average_lifespan_years
+        description: "Average lifespan in years"
+
+      - name: source_system
+        description: "Source system identifier"

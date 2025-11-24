@@ -1,0 +1,13 @@
+zoo_analytics:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: 'data/zoo_analytics.duckdb'
+      attach:
+        - path: 'data/act_system.duckdb'
+          alias: act_system
+        - path: 'data/vrm_system.duckdb'
+          alias: vrm_system
+      threads: 4
+

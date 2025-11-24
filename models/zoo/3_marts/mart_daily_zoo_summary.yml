@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: mart_daily_zoo_summary
+    description: "Daily summary of zoo operations"
+    columns:
+      - name: operation_date
+        description: "Date of operation"
+        data_tests:
+          - unique
+          - not_null
+
+      - name: total_visitors
+        description: "Total number of visitors"
+        data_tests:
+          - not_null
+
+      - name: total_revenue_usd
+        description: "Total revenue in USD"
+        data_tests:
+          - not_null

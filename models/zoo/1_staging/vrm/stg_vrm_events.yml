@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: stg_vrm_events
+    description: "Staged event data from VRM system"
+    columns:
+      - name: vrm_event_id
+        description: "Unique identifier for each event"
+        data_tests:
+          - unique
+          - not_null

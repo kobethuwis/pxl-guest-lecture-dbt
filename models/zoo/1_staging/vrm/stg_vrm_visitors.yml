@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: stg_vrm_visitors
+    description: "Staged visitor data from VRM system"
+    columns:
+      - name: vrm_visitor_id
+        description: "Unique identifier for each visitor"
+        data_tests:
+          - unique
+          - not_null
