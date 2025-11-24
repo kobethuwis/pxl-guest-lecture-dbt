@@ -1,9 +1,4 @@
 -- Mart: Daily zoo operations summary
--- TODO: Complete aggregation and add calculate_visitor_capacity macro
-
-{{ config(
-    enabled=false
-) }}
 
 with daily_operations as (
     select * from {{ ref('int_daily_operations') }}
@@ -17,8 +12,13 @@ daily_aggregated as (
     select
         operation_date,
         count(distinct vrm_visitor_id) as total_visitors,
-        sum(vrm_total_spent_usd) as total_revenue_usd
-        -- TODO: Add avg_visitor_spending_usd, weather aggregations
+        sum(vrm_total_spent_usd) as total_revenue_usd,
+        avg(vrm_total_spent_usd) as avg_visitor_spending_usd,
+        max(temperature_celsius) as max_temperature_celsius,
+        min(temperature_celsius) as min_temperature_celsius,
+        avg(temperature_celsius) as avg_temperature_celsius,
+        max(precipitation_mm) as max_precipitation_mm,
+        mode(weather_condition) as most_common_weather_condition
     from daily_operations
     group by operation_date
 ),
@@ -34,8 +34,14 @@ select
     daily_aggregated.operation_date,
     daily_aggregated.total_visitors,
     daily_aggregated.total_revenue_usd,
+    daily_aggregated.avg_visitor_spending_usd,
+    daily_aggregated.max_temperature_celsius,
+    daily_aggregated.min_temperature_celsius,
+    daily_aggregated.avg_temperature_celsius,
+    daily_aggregated.max_precipitation_mm,
+    daily_aggregated.most_common_weather_condition,
     animal_counts.total_animals_in_care,
-    animal_counts.total_enclosures_occupied
-    -- TODO: Add visitor_capacity_utilization_percent using calculate_visitor_capacity macro
+    animal_counts.total_enclosures_occupied,
+    {{ calculate_visitor_capacity('daily_aggregated.total_visitors', '1000') }} as visitor_capacity_utilization_percent
 from daily_aggregated
 cross join animal_counts

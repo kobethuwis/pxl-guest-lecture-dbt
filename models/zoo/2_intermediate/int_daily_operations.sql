@@ -1,9 +1,4 @@
 -- Intermediate model: visitors + weather
--- TODO: Complete join and add weather columns
-
-{{ config(
-    enabled=false
-) }}
 
 with visitors as (
     select * from {{ ref('stg_vrm_visitors') }}
@@ -19,10 +14,13 @@ joined as (
         visitors.vrm_visitor_id,
         visitors.vrm_visitor_type,
         visitors.vrm_group_size,
-        visitors.vrm_total_spent_usd
-        -- TODO: Add weather columns
+        visitors.vrm_total_spent_usd,
+        weather.temperature_celsius,
+        weather.humidity_percent,
+        weather.precipitation_mm,
+        weather.weather_condition
     from visitors
-    -- TODO: LEFT JOIN weather on vrm_visit_date = weather_date
+    left join weather on visitors.vrm_visit_date = weather.weather_date
 )
 
 select * from joined

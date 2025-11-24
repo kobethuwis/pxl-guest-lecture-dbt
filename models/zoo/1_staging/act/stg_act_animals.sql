@@ -1,5 +1,4 @@
 -- Staging model for animals from ACT system
--- TODO: Add source_system column
 
 with source as (
     select * from {{ source('act_system', 'animals') }}
@@ -15,8 +14,8 @@ renamed as (
         cast(arrival_date as date) as act_arrival_date,
         health_status as act_health_status,
         keeper_id as act_keeper_id,
-        cast(last_vet_check as date) as act_last_vet_check
-        -- TODO: Add source_system = 'ACT'
+        cast(last_vet_check as date) as act_last_vet_check,
+        'ACT' as source_system
     from source
 )
 
