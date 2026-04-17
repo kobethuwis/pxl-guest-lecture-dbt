@@ -6,9 +6,11 @@ Learn dbt through hands-on practice: managing multiple sources, modularizing SQL
 
 You're a data analyst at **Wildlife Wonders Zoo**. You need to build analytics dashboards using data from:
 
-- **ACT (Animal Care Tool)** - DuckDB database with animal records, species, enclosures, feeding schedules
-- **VRM (Visitor Relationship Management)** - DuckDB database with visitor data, tickets, events
-- **Weather data** - CSV file with daily weather information
+- **ACT (Animal Care Tool)** - Simulated upstream system: a separate DuckDB file (`data/act_system.duckdb`) attached in `profiles.yml`, like its own database
+- **VRM (Visitor Relationship Management)** - Same idea: `data/vrm_system.duckdb` stands in for another upstream system
+- **Weather data** - Delivered as a **CSV seed** (`seeds/weather_data.csv`), like a file drop from an external provider
+
+In a real organization, ACT and VRM might be Postgres, APIs, or vendor SaaS; here we use extra DuckDB files so you can run everything locally without standing up multiple servers.
 
 ## Repository Structure
 
@@ -28,10 +30,16 @@ pxl-guest-lecture-dbt/
 ├── documentation/              
 │   ├── hands_on_session_1.md   
 │   └── business_queries/      
-├── setup/                     
+├── duckdb-setup/              
 │   ├── setup_databases.py      
 │   ├── init_duckdb.py         
-│   └── README.md               
+│   └── setup.sh
+├── tools/
+│   └── data_viewer/            # optional Streamlit viewer (see below)
+├── .streamlit/
+│   └── config.toml             # Streamlit: no email prompt, quieter logs
+├── requirements.txt
+├── requirements-viewer.txt     # optional deps for the viewer
 └── dbt_project.yml             
 ```
 
@@ -148,6 +156,20 @@ ls results/  # CSV files exported automatically
 ```
 
 Take your time to get a feeling what you're working with in this repository by viewing the results, looking at the models and documentation before diving into the exercises.
+
+### Optional: Local data viewer (Streamlit)
+
+Instead of opening files only in the editor, you can open **dbt result exports** under `results/` and browse **source systems** read-only: the ACT and VRM DuckDB files plus the **weather CSV seed** (and any other seed CSVs).
+
+Use the same virtual environment as dbt (or another venv), install optional deps, and run from the **repository root**:
+
+```bash
+source .dbt-venv/bin/activate   # or your venv
+pip install -r requirements-viewer.txt
+streamlit run tools/data_viewer/app.py
+```
+
+Then open the URL Streamlit prints (defaults to localhost). The viewer only reads local files; keep it on your own machine for class. With the command run from the repo root, [`.streamlit/config.toml`](.streamlit/config.toml) turns off Streamlit’s first-run email prompt, disables usage-stats collection, and sets Streamlit’s own log level to `warning` so the terminal stays quieter.
 
 ## Exercises
 

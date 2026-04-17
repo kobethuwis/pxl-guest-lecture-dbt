@@ -1,0 +1,12 @@
+# Used when you run `streamlit run ...` from the repository root (recommended).
+
+[server]
+# Terminal prompt asking for an email on first local run
+showEmailPrompt = false
+
+[browser]
+gatherUsageStats = false
+
+[logger]
+# Streamlit internal logs: "error", "warning", "info", or "debug"
+level = "warning"
