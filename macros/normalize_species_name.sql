@@ -1,11 +1,9 @@
 {% macro normalize_species_name(column_name) %}
-    -- Normalizes species names: uppercase, spaces to underscores, remove special chars
-    upper(
-        regexp_replace(
-            replace({{ column_name }}, ' ', '_'),
-            '[^A-Z0-9_]',
-            ''
-        )
+    -- Uppercase, spaces to underscores, strip anything that is not letter, digit, or underscore
+    regexp_replace(
+        replace(upper({{ column_name }}), ' ', '_'),
+        '[^[:alnum:]_]',
+        '',
+        'g'
     )
 {% endmacro %}
-
